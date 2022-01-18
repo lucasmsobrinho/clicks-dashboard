@@ -1,0 +1,28 @@
+#footer {
+    padding-top: 3vmin;
+    text-align: center;
+}
+
+.media-button-container {
+    display: flex;
+    margin: auto;
+    max-width:fit-content
+}
+
+.media-button {
+    font-size: 1.2em;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    margin-bottom: 1.2vmin;
+    color: #444;
+}
+
+.media-button:hover {
+    transition:all .5s linear;
+    color: #fff;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #3d3d3d;
+}
