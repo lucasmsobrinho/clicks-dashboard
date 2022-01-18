@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ClicksFrame from './ClicksFrame';    
 import './ClicksDataManager.css';
+import RawClicksDataTable from './RawClicksDataTable';
+import ClickSpeedChart from './charts/ClickSpeedChart';
+import TargetAccuracyHeatMap from './charts/TargetAccuracyHeatMap';
+import TotalClicks from './charts/TotalClicks';
 
 class ClicksDataManager extends Component {
     constructor(props) {
@@ -9,7 +13,9 @@ class ClicksDataManager extends Component {
         this.state = {
             time: 0,
             running: false,
-            clickData: [ ] // {timestamp, posX, posY, onTarget}
+            clickData: [ ], // {timestamp, posX, posY, onTarget}
+            totalClicks:0,
+            onTargetClicks: 0
         }
     }
 
@@ -55,18 +61,22 @@ class ClicksDataManager extends Component {
         })
     }
 
-    registerClick = (posX, posY, onTarget) => {
-        const {clickData, time} = this.state
+    registerClick = (targetPosX, targetPosY, clickPosX, clickPosY, onTarget) => {
+        const {clickData, time, totalClicks, onTargetClicks} = this.state
         const newClick = {
+            id: this.state.clickData.length + 1,
             timestamp: time,
-            posX: posX,
-            posY: posY,
+            targetPosX: targetPosX,
+            targetPosY: targetPosY,
+            clickPosX: clickPosX,
+            clickPosY: clickPosY,
             onTarget: onTarget
         }
         this.setState({
-            clickData: [...clickData, newClick]
-        })
-        console.log(newClick)
+            clickData: [...clickData, newClick],
+            totalClicks: totalClicks+1,
+            onTargetClicks: onTarget? onTargetClicks+1: onTargetClicks,
+        });
     }
 
     render() {
@@ -79,12 +89,19 @@ class ClicksDataManager extends Component {
                         resetTimer={this.resetTimer}
                     />
                 </div>
-                <div className="card card-wide"></div>
-                <div className="card card-tall"></div>
+                <div className="card card-wide card-t2">
+                    <ClickSpeedChart />
+                </div>
+                <div className="card card-w2 card-t2">
+                    <TargetAccuracyHeatMap />
+                </div>
+                <div className="card">
+                    <TotalClicks data={this.state}/>
+                </div>
                 <div className="card"></div>
-                <div className="card"></div>
-                <div className="card"></div>
-                <div className="card"></div>
+                <div className="card card-ultra-wide raw-clicks-data-table">
+                    <RawClicksDataTable clickData={this.state.clickData}/>
+                </div>
             </div>
         );
     }

@@ -9,9 +9,9 @@
 
 .click-data-grid {
     display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-auto-rows: 140px;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    grid-auto-rows: 90px;
 }
 
 .card {
@@ -21,13 +21,32 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+    align-items: center;
 }
 
-.card-tall {
+.card-t2 {
     grid-row: span 2 / auto;
 }
 
-.card-wide {
-    grid-column: span 2 / auto;
+.card-tall {
+    grid-row: span 3 / auto;
 }
 
+.card-ultra-tall {
+    grid-row: span 4 / auto;
+}
+
+.card-w2 {
+    grid-column: span 2 / auto;
+}
+.card-wide {
+    grid-column: span 3 / auto;
+}
+
+.card-ultra-wide {
+    grid-column: span 6 / auto;
+}
+
+.raw-clicks-data-table {
+    overflow: auto;
+}

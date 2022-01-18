@@ -22,13 +22,13 @@ const Footer = () => {
     return(
         <section id="footer">
             <MediaButtonContainer items={medias}/>
-            <div className="copyright">@lucasmsobrinho</div>
+            <span className="copyright">@lucasmsobrinho<br/>2022</span>
         </section>
 )}
 
 const MediaButtonContainer = (props) => {
     const mediaList = props.items.map(media => 
-            <MediaButton item={media}/>
+            <MediaButton item={media} key={media.name}/>
     );
     return (
         <div className="media-button-container">

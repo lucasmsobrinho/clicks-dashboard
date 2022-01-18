@@ -10,8 +10,11 @@ class ClicksFrame extends Component {
     }
     
     clickHandler = (event) => {
-        const {posX, posY} = this.targetRef.current.state
-        this.props.registerClick(posX, posY, false)
+        const {targetPosX, targetPosY} = this.targetRef.current.state
+        event.stopPropagation()
+        const clickPosX = event.nativeEvent.offsetX;
+        const clickPosY = event.nativeEvent.offsetY;
+        this.props.registerClick(targetPosX, targetPosY, clickPosX, clickPosY, false)
         this.targetRef.current.changePosition()
     }
 

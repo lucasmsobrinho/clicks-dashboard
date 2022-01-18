@@ -7,7 +7,7 @@
 }
 
 body {
-  color: #61dafb;
+  color: gray;
   background-color: #000;
 }
 
@@ -47,6 +47,7 @@ body {
   margin: auto;
   padding-top: 10px;
   font-weight: bold;
+  color: var(--dark-color)
 }
 
 .logotype-dashboard {
@@ -54,4 +55,5 @@ body {
   margin-left: 5px;
   font-size: 20px;
   letter-spacing: 5px;
+  color: var(--dark-color)
 }

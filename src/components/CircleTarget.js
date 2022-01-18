@@ -6,30 +6,33 @@ class CircleTarget extends Component {
         super(props);
         
         this.state = {
-            posX: 0,
-            posY: 0
+            targetPosX: 0,
+            targetPosY: 0
         }
     }
 
     changePosition = () => {
         this.setState({
-            posY: Math.round(250*Math.random()),
-            posX: Math.round(250*Math.random())
+            targetPosY: Math.round(250*Math.random()),
+            targetPosX: Math.round(250*Math.random())
         })
     }
 
     clickHandler = (event) => {
-        const {posX, posY} = this.state
+        const {targetPosX, targetPosY} = this.state
+        const clickPosX = event.nativeEvent.offsetX + targetPosX;
+        const clickPosY = event.nativeEvent.offsetY + targetPosY;
         event.stopPropagation()
-        this.props.registerClick(posX, posY, true)
+        console.log(targetPosX, targetPosY, clickPosX, clickPosY)
+        this.props.registerClick(targetPosX, targetPosY, clickPosX, clickPosY, true)
         this.changePosition()
     }
     
     render() {
-        const {posX, posY} = this.state
+        const {targetPosX, targetPosY} = this.state
         return (
             <button className='circle-target'
-                style={{marginTop: posY, marginLeft: posX}}
+                style={{marginTop: targetPosY, marginLeft: targetPosX}}
                 onClick={this.clickHandler}
             >
 
