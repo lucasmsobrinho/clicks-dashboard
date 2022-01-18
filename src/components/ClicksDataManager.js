@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ClicksFrame from './ClicksFrame';    
 import './ClicksDataManager.css';
 
 class ClicksDataManager extends Component {
@@ -65,12 +66,19 @@ class ClicksDataManager extends Component {
         this.setState({
             clickData: [...clickData, newClick]
         })
+        console.log(newClick)
     }
 
     render() {
         return (
             <div className="click-data-viewer click-data-grid">
-                <div className="card card-tall card-wide"></div>
+                <div className="card card-tall card-wide">
+                    <ClicksFrame
+                        registerClick={this.registerClick}
+                        startTimer={this.startTimer}
+                        resetTimer={this.resetTimer}
+                    />
+                </div>
                 <div className="card card-wide"></div>
                 <div className="card card-tall"></div>
                 <div className="card"></div>

@@ -1,0 +1,7 @@
+.clickable-frame {
+    background-color: #fff;
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    border: 1px solid gray;
+}

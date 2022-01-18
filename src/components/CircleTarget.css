@@ -1,0 +1,8 @@
+.circle-target {
+  background-color: #E63946;
+  color: #282c34;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  border: none;
+}
