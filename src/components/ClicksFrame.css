@@ -1,7 +1,18 @@
+.block-screen {
+    background: rgba(0,0,0,0.5); 
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    position: sticky;
+    align-items: center;
+}
+
 .clickable-frame {
     background-color: #fff;
     height: 300px;
     width: 300px;
     margin: auto;
     border: 1px solid gray;
+    position: sticky;
+    text-align: center;
 }

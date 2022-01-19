@@ -6,12 +6,12 @@
 .correct-clicks {
     font-size: 48px;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--average-color);
 }
 
 .total-clicks {
     font-size: 16px;
-    color: #ccc;
+    color: var(--primary-color);
 }
 
 .card-title {

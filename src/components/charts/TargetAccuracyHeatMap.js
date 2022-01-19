@@ -18,26 +18,14 @@ class TargetAccuracyHeatMap extends Component {
                 dataLabels: {
                   enabled: false
                 },
-                colors: ["#008FFB"],
+                colors: ["#457B9D", "#98CACC"],
             },
-            /* format:
-            {
-                name: '00-20',
-                data: [
-                    { x:"00-20",  y: 0.3},
-                    { x:"20-40",  y: 0.5},
-                    { x:"40-60",  y: 0.8},
-                    { x:"60-80",  y: 0.6},
-                    { x:"80-100", y: 0.2}
-                ]
-            },
-            */
         };
     }
 
     randomHeatmap = () => {
         const xBins = ["A", "B", "C", "D", "E"]
-        const yBins = ["A", "B", "C", "D", "E"] //["00-20", "20-40", "40-60", "60-80", "80-100"]
+        const yBins = ["A", "B", "C", "D", "E"]
         const heatmap = yBins.map(name => {
             return ({
                 name: name,

@@ -6,25 +6,28 @@ import ClickSpeedChart from './charts/ClickSpeedChart';
 import TargetAccuracyHeatMap from './charts/TargetAccuracyHeatMap';
 import TotalClicks from './charts/TotalClicks';
 
+const initialState = {
+    time: 0,
+    running: false,
+    gameHasEnded: false,
+    totalClicks:0,
+    onTargetClicks: 0,
+    clickData: [],
+}
 class ClicksDataManager extends Component {
     constructor(props) {
         super(props);
         
-        this.state = {
-            time: 0,
-            running: false,
-            clickData: [ ], // {timestamp, posX, posY, onTarget}
-            totalClicks:0,
-            onTargetClicks: 0
-        }
+        this.state = initialState;
     }
 
     componentDidUpdate() {
         if (this.state.running) {
-            if (this.state.time === 5000) {
+            if (this.state.time === 10000) {
                 clearInterval(this.timer)
                 this.setState({
                     running: false,
+                    gameHasEnded: true,
                 })
             }
         } else {
@@ -33,25 +36,15 @@ class ClicksDataManager extends Component {
     }
 
     startTimer = () => {
-        if(this.state.running === false) {
+        if(!this.state.running) {
             this.setState({running: true})
             this.timer = setInterval(() => this.timeStep(), 10)
         }
     }
 
-    resetTimer = () => {
-        if(this.state.running === false) {
-            this.setState({
-                time: 0
-            })
-        }
-    }
-
     resetData = () => {
-        if(this.state.running === false) {
-            this.setState({
-                clickData: [ ]
-            })
+        if(!this.state.running) {
+            this.setState(initialState, console.log(this.state))
         }
     }
 
@@ -63,6 +56,7 @@ class ClicksDataManager extends Component {
 
     registerClick = (targetPosX, targetPosY, clickPosX, clickPosY, onTarget) => {
         const {clickData, time, totalClicks, onTargetClicks} = this.state
+        const clickDistance = Math.sqrt((clickPosX - (targetPosX+25))**2 +(clickPosY - (targetPosY+25))**2)
         const newClick = {
             id: this.state.clickData.length + 1,
             timestamp: time,
@@ -70,8 +64,10 @@ class ClicksDataManager extends Component {
             targetPosY: targetPosY,
             clickPosX: clickPosX,
             clickPosY: clickPosY,
-            onTarget: onTarget
+            onTarget: onTarget,
+            clickDistance: clickDistance
         }
+
         this.setState({
             clickData: [...clickData, newClick],
             totalClicks: totalClicks+1,
@@ -80,13 +76,17 @@ class ClicksDataManager extends Component {
     }
 
     render() {
+        const { time, running, gameHasEnded } = this.state
         return (
             <div className="click-data-viewer click-data-grid">
-                <div className="card card-tall card-wide">
+                <div className="card card-tall card-wide clicks-frame">
                     <ClicksFrame
                         registerClick={this.registerClick}
                         startTimer={this.startTimer}
-                        resetTimer={this.resetTimer}
+                        resetData={this.resetData}
+                        running={running}
+                        gameHasEnded={gameHasEnded}
+                        time={time}
                     />
                 </div>
                 <div className="card card-wide card-t2">

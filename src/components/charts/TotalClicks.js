@@ -3,7 +3,6 @@ import './TotalClicks.css'
 
 const TotalClicks = (props) => {
     const {onTargetClicks, totalClicks} = props.data;//{clicksOnTarget:17, clicks:23};
-    console.log(props)
     return (
         <div className="click-counter-viewer">
             <div className="card-title">Click Counter</div>

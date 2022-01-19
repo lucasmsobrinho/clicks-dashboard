@@ -1,0 +1,13 @@
+.game-instructions{
+    color: white;
+    font-size: 16px;
+    padding-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 0;
+    text-align: 'center';
+}
+
+.click-restart-button {
+    margin-top: 42%;
+}

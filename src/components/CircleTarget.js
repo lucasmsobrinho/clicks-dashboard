@@ -7,7 +7,7 @@ class CircleTarget extends Component {
         
         this.state = {
             targetPosX: 0,
-            targetPosY: 0
+            targetPosY: 0,
         }
     }
 
@@ -23,16 +23,20 @@ class CircleTarget extends Component {
         const clickPosX = event.nativeEvent.offsetX + targetPosX;
         const clickPosY = event.nativeEvent.offsetY + targetPosY;
         event.stopPropagation()
-        console.log(targetPosX, targetPosY, clickPosX, clickPosY)
         this.props.registerClick(targetPosX, targetPosY, clickPosX, clickPosY, true)
         this.changePosition()
     }
     
     render() {
         const {targetPosX, targetPosY} = this.state
+        const { runningGame } = this.props
         return (
             <button className='circle-target'
-                style={{marginTop: targetPosY, marginLeft: targetPosX}}
+                style={{
+                    marginTop: targetPosY, 
+                    marginLeft: targetPosX, 
+                    display: runningGame?'block':'none'
+                }}
                 onClick={this.clickHandler}
             >
 

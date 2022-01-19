@@ -22,6 +22,7 @@ class ClickSpeedChart extends Component {
                         show: false
                     },
                 },
+                colors: ["#457B9D", "#A8DADC"],
                 dataLabels: {
                     enabled: false
                 },

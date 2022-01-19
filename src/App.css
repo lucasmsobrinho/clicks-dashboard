@@ -30,7 +30,7 @@ body {
   margin: auto;
   text-align: center;
   position: relative;
-  z-index: 3;
+  z-index: 2;
 }
 
 .content-container {
@@ -55,5 +55,5 @@ body {
   margin-left: 5px;
   font-size: 20px;
   letter-spacing: 5px;
-  color: var(--dark-color)
+  color: var(--average-color)
 }

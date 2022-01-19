@@ -22,6 +22,7 @@
     height: 100%;
     width: 100%;
     align-items: center;
+    z-index: 1;
 }
 
 .card-t2 {
@@ -49,4 +50,9 @@
 
 .raw-clicks-data-table {
     overflow: auto;
+}
+
+.clicks-frame {
+    position: relative;
+    z-index: 1;
 }
