@@ -8,7 +8,8 @@ class CountdownTimer extends Component {
             <div 
                 className="countdown-timer"
                 style={{color:(timeLeft<3)?'red':'black', position:'absolute',
-                marginLeft: 120, display:running?'block':'none'}}
+                marginLeft: 120, display:running?'block':'none',
+                WebkitUserSelect: 'none', userSelect: 'none'}}
             >
                 00:0{timeLeft}
             </div>

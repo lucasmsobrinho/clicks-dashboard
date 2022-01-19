@@ -11,6 +11,9 @@ const RawClicksDataTable = ({clickData}) => {
                     <td>{click.targetPosY}</td>
                     <td>{click.clickPosX}</td>
                     <td>{click.clickPosY}</td>
+                    <td>{click.clickSpeed}</td>
+                    <td>{click.clickDistance}</td>
+                    <td>{click.onTargetClickSpeed}</td>
                 </tr>
         )}
     )
@@ -27,6 +30,9 @@ const RawClicksDataTable = ({clickData}) => {
                     <th>targetPosY</th>
                     <th>clickPosX</th>
                     <th>clickPosY</th>
+                    <th>clickSpeed</th>
+                    <th>clickDistance</th>
+                    <th>onTargetClickSpeed</th>
                 </tr>
                 {clickDataRows}
                 </tbody>

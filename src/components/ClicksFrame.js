@@ -18,7 +18,6 @@ class ClicksFrame extends Component {
         const clickPosX = event.nativeEvent.offsetX;
         const clickPosY = event.nativeEvent.offsetY;
         this.props.registerClick(targetPosX, targetPosY, clickPosX, clickPosY, false)
-        this.targetRef.current.changePosition()
     }
 
     startGame = (event) => {
