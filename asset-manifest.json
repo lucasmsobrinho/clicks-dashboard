@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/clicks-analytics/static/css/main.5208200b.css",
-    "main.js": "/clicks-analytics/static/js/main.1ac5a101.js",
-    "static/js/787.0f17ef69.chunk.js": "/clicks-analytics/static/js/787.0f17ef69.chunk.js",
-    "index.html": "/clicks-analytics/index.html",
-    "main.5208200b.css.map": "/clicks-analytics/static/css/main.5208200b.css.map",
-    "main.1ac5a101.js.map": "/clicks-analytics/static/js/main.1ac5a101.js.map",
-    "787.0f17ef69.chunk.js.map": "/clicks-analytics/static/js/787.0f17ef69.chunk.js.map"
+    "main.css": "/clicks-dashboard/static/css/main.5208200b.css",
+    "main.js": "/clicks-dashboard/static/js/main.f705b34c.js",
+    "static/js/787.7ba27a5b.chunk.js": "/clicks-dashboard/static/js/787.7ba27a5b.chunk.js",
+    "index.html": "/clicks-dashboard/index.html",
+    "main.5208200b.css.map": "/clicks-dashboard/static/css/main.5208200b.css.map",
+    "main.f705b34c.js.map": "/clicks-dashboard/static/js/main.f705b34c.js.map",
+    "787.7ba27a5b.chunk.js.map": "/clicks-dashboard/static/js/787.7ba27a5b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5208200b.css",
-    "static/js/main.1ac5a101.js"
+    "static/js/main.f705b34c.js"
   ]
 }
