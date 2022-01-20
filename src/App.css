@@ -42,6 +42,16 @@ body {
   z-index: 1;
 }
 
+.logo-circle {
+  height: 16px;
+  position: absolute;
+  width: 16px;
+  background: #E63946;
+  margin-top: 61px;
+  margin-left: 159.5px;
+  border-radius: 8px;
+}
+
 .logotype-clicks {
   font-size: 48px;
   margin: auto;

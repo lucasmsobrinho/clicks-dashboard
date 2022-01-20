@@ -7,6 +7,7 @@ function App() {
     <div className="app">
       <div className="main-container">
         <div className="logo-container">
+          <div className="logo-circle"></div>
           <p className="logotype-clicks">CLICKS</p>
           <p className="logotype-dashboard"> DASHBOARD</p>
         </div>
