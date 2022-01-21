@@ -6,7 +6,9 @@ const options = {
         animations: {
             enabled: false,
         },
-        height: 350,
+        toolbar: {
+            show: false
+        },
         type: 'scatter',
         zoom: {
             enabled: false,
@@ -15,15 +17,21 @@ const options = {
     xaxis: {
         tickAmount: 10,
         labels: {
-            formatter: function(val) {
-                return parseFloat(val).toFixed(1)
-            }
+        }
+    },
+    markers: {
+        size: 4,
+        hover: {
+            size: 5,
         }
     },
     yaxis: {
         tickAmount: 7
     },
     colors: ["#A8DADC", "#457B9D"],
+    legend: {
+        position: "top"
+    },
 }
 
 const series = [{
@@ -38,6 +46,13 @@ const series = [{
 
 class ClickTimeByDistanceChart extends Component {
     render() {
+        const series = [{
+            name: "offTarget",
+            data: this.props.offTargetTimeVsDistance,
+        }, {
+            name: "onTarget",
+            data: this.props.onTargetTimeVsDistance,
+        }]
         return (
             <div id="chart">
                 <ReactApexChart options={options}

@@ -3,8 +3,6 @@ import ReactApexChart from 'react-apexcharts';
 
 const options = {
     chart: {
-        height: 200,
-        width: 100,
         type: 'area',
         toolbar: {
             show: false
@@ -18,14 +16,22 @@ const options = {
         enabled: false
     },
     stroke: {
-        curve: 'smooth'
+        curve: 'smooth',
+        width: 3,
+    },
+    yaxis: {
+        labels: {}
     },
     xaxis: {
-        tickAmount: 10,
+        tickAmount: 2,
         min: 1,
         max: 10,
         labels: {
             showDuplicates: false,
+        },
+        title : {
+            text: 'time (s)',
+            offsetY: -15,
         }
     },
     legend: {
@@ -60,7 +66,7 @@ class ClickSpeedChart extends Component {
                     options={options}
                     series={series}
                     type="area"
-                    height="180px"
+                    height="200px"
                     width="300px"/>
             </div>
         );
