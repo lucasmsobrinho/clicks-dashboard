@@ -7,8 +7,9 @@ import TargetAccuracyHeatMap from './charts/TargetAccuracyHeatMap';
 import TotalClicks from './charts/TotalClicks';
 import AccuracyByDistanceChart from './charts/AccuracyByDistanceChart';
 import ClickTimeByDistanceChart from './charts/ClickTimeByDistanceChart';
-import TraveledDistance from './charts/TraveledDistance';
+import TravelDistance from './charts/TravelDistance';
 import AverageOffTargetDistance from './charts/AverageOffTargetDistance';
+import ClickAccuracy from './charts/ClickAccuracy';
 
 const initialState = {
     time: 0,
@@ -117,42 +118,41 @@ class ClicksDataManager extends Component {
     render() {
         const { time, running, gameHasEnded } = this.state
         return (
-            <div className="click-data-viewer click-data-grid">
-                <div className="card card-tall card-wide clicks-frame">
-                    <ClicksFrame
-                        registerClick={this.registerClick}
-                        startTimer={this.startTimer}
-                        resetData={this.resetData}
-                        running={running}
-                        gameHasEnded={gameHasEnded}
-                        time={time}
-                    />
+            <div className="click-data-viewer">
+                <div className="top-dashboard-section">
+                    <div className="card card-top">
+                        <TotalClicks data={this.state}/>
+                    </div>
+                    <div className="card card-top">
+                        <TravelDistance data={this.state}/>
+                    </div>
+                    <div className="card card-top">
+                        <AverageOffTargetDistance data={this.state}/>
+                    </div>
+                    <div className="card card-top">
+                        <ClickAccuracy data={this.state}/>
+                    </div>
                 </div>
-                <div className="card card-wide card-t2">
-                    <ClickSpeedChart clickData={this.state.clickData} time={this.state.time}/>
-                </div>
-                <div className="card card-w2 card-t2">
-                    <ClickTimeByDistanceChart 
-                        onTargetTimeVsDistance={this.state.onTargetTimeVsDistance}
-                        offTargetTimeVsDistance={this.state.offTargetTimeVsDistance}
-                    />
-                </div>
-                <div className="card">
-                    <TotalClicks data={this.state}/>
-                </div>
-                <div className="card">
-                    <TraveledDistance data={this.state}/>
-                </div>
-                <div className="card">
-                    <AverageOffTargetDistance data={this.state}/>
-                </div>
-                <div className="card">
-                    <span style={{fontSize:14, textAlign:'center'}}>Last Click Time </span>
-                    {this.state.lastClickTime ? (10 - this.state.lastClickTime/1000).toFixed(2): '-'}<br/>
-                    {this.state.lastOnTargetClickTime ? (10 - this.state.lastOnTargetClickTime/1000).toFixed(2): '-'}
-                </div>
-                <div className="card card-w2">
-
+                <div className="click-data-grid">
+                    <div className="card card-tall card-wide clicks-frame">
+                        <ClicksFrame
+                            registerClick={this.registerClick}
+                            startTimer={this.startTimer}
+                            resetData={this.resetData}
+                            running={running}
+                            gameHasEnded={gameHasEnded}
+                            time={time}
+                        />
+                    </div>
+                    <div className="card card-wide card-t2">
+                        <ClickSpeedChart clickData={this.state.clickData} time={this.state.time}/>
+                    </div>
+                    <div className="card card-w2 card-t2">
+                        <ClickTimeByDistanceChart 
+                            onTargetTimeVsDistance={this.state.onTargetTimeVsDistance}
+                            offTargetTimeVsDistance={this.state.offTargetTimeVsDistance}
+                        />
+                    </div>
                 </div>
             </div>
         );

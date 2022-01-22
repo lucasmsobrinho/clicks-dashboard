@@ -12,7 +12,7 @@ const medias = [
         icon: <FaLinkedin/>,
         url: "https://www.linkedin.com/in/lucasmsobrinho/",
     }, {
-        name: "portfolio",
+        name: "resumee/portfolio",
         icon: <FaCode/>,
         url: "https://www.lucassobrinho.com/",
     }
