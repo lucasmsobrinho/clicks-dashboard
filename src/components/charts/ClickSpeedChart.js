@@ -54,7 +54,7 @@ class ClickSpeedChart extends Component {
         })
     
         const series =  [{
-            name: 'General CS',
+            name: 'Total CS',
             data: generalCS
         }, {
             name: 'Accurate CS',

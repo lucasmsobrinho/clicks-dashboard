@@ -19,7 +19,22 @@
 
 .media-button:hover {
     transition:all .5s linear;
-    color: #fff;
+    color: var(--average-color);
+}
+
+.footer-circle {
+  height: 19px;
+  position: absolute;
+  width: 19px;
+  background: #E63946;
+  margin-top: -24px;
+  margin-left: 0px;
+  border-radius: 10px;
+}
+
+.footer-circle:hover {
+    background: transparent;
+    transition:all .5s linear;
 }
 
 .copyright {

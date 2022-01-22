@@ -7,6 +7,8 @@ import TargetAccuracyHeatMap from './charts/TargetAccuracyHeatMap';
 import TotalClicks from './charts/TotalClicks';
 import AccuracyByDistanceChart from './charts/AccuracyByDistanceChart';
 import ClickTimeByDistanceChart from './charts/ClickTimeByDistanceChart';
+import TraveledDistance from './charts/TraveledDistance';
+import AverageOffTargetDistance from './charts/AverageOffTargetDistance';
 
 const initialState = {
     time: 0,
@@ -21,6 +23,8 @@ const initialState = {
     clicksOnTargetBySector: Array(5).fill(Array(5).fill(0)),
     onTargetTimeVsDistance: [],
     offTargetTimeVsDistance: [],
+    totalTraveledDistance: 0,
+    averageOffTargetDistance: 0,
 }
 
 class ClicksDataManager extends Component {
@@ -70,11 +74,16 @@ class ClicksDataManager extends Component {
     registerClick = (targetPosX, targetPosY, clickPosX, clickPosY, onTarget) => {
         const {clickData, time, totalClicks, onTargetClicks, lastOnTargetClickTime,
             clicksOffTargetBySector, clicksOnTargetBySector, lastClickTime,
-            onTargetTimeVsDistance, offTargetTimeVsDistance } = this.state
-        const clickDistance = Math.sqrt((clickPosX - (targetPosX+25))**2 +(clickPosY - (targetPosY+25))**2)
-        //const xSector = Math.round(5*clickPosX/300)
-        //const ySector = Math.round(5*clickPosY/300)
-        const newPoint = [clickDistance, (time-lastClickTime)/1000];
+            onTargetTimeVsDistance, offTargetTimeVsDistance, totalTraveledDistance,
+            averageOffTargetDistance } = this.state
+            
+        const lastClickPosX = clickData.length > 0 ? clickData.slice(-1)[0].clickPosX : 150
+        const lastClickPosY = clickData.length > 0 ? clickData.slice(-1)[0].clickPosY : 150
+        
+        const clickDistanceFromTarget = Math.sqrt((clickPosX - (targetPosX+25))**2 +(clickPosY - (targetPosY+25))**2)
+        const travelDistanceLastClick = Math.sqrt((clickPosX - lastClickPosX)**2 + (clickPosY - lastClickPosY)**2)
+        const newPoint = [travelDistanceLastClick, (time-lastClickTime)/1000];
+
         const newClick = {
             id: this.state.clickData.length + 1,
             timestamp: time,
@@ -84,7 +93,8 @@ class ClicksDataManager extends Component {
             clickPosY: clickPosY,
             onTarget: onTarget,
             // processed data // TODO: evaluate if is needed to break this in another obj
-            clickDistance: clickDistance.toFixed(2),
+            clickDistanceFromTarget: clickDistanceFromTarget.toFixed(2),
+            travelDistanceLastClick: travelDistanceLastClick.toFixed(2),
             clickSpeed: (1000*(totalClicks+1)/time).toFixed(2),
             onTargetClickSpeed: (1000*(onTargetClicks+(onTarget?1:0))/time).toFixed(2),
         }
@@ -92,13 +102,15 @@ class ClicksDataManager extends Component {
         this.setState({
             clickData: [...clickData, newClick],
             totalClicks: totalClicks+1,
-            onTargetClicks: onTarget? onTargetClicks+1: onTargetClicks,
+            onTargetClicks: onTargetClicks + (onTarget && 1),
             lastOnTargetClickTime: onTarget? time:lastOnTargetClickTime,
             lastClickTime: time,
             clicksOffTargetBySector: clicksOffTargetBySector,
             clicksOnTargetBySector: clicksOnTargetBySector,
             onTargetTimeVsDistance: onTarget?[...onTargetTimeVsDistance, newPoint]:onTargetTimeVsDistance,
             offTargetTimeVsDistance: onTarget?offTargetTimeVsDistance:[...offTargetTimeVsDistance, newPoint],
+            totalTraveledDistance: totalTraveledDistance + travelDistanceLastClick,
+            averageOffTargetDistance: averageOffTargetDistance + (!onTarget && clickDistanceFromTarget),
         });
     }
 
@@ -120,21 +132,27 @@ class ClicksDataManager extends Component {
                     <ClickSpeedChart clickData={this.state.clickData} time={this.state.time}/>
                 </div>
                 <div className="card card-w2 card-t2">
-                    <AccuracyByDistanceChart />
+                    <ClickTimeByDistanceChart 
+                        onTargetTimeVsDistance={this.state.onTargetTimeVsDistance}
+                        offTargetTimeVsDistance={this.state.offTargetTimeVsDistance}
+                    />
                 </div>
                 <div className="card">
                     <TotalClicks data={this.state}/>
+                </div>
+                <div className="card">
+                    <TraveledDistance data={this.state}/>
+                </div>
+                <div className="card">
+                    <AverageOffTargetDistance data={this.state}/>
                 </div>
                 <div className="card">
                     <span style={{fontSize:14, textAlign:'center'}}>Last Click Time </span>
                     {this.state.lastClickTime ? (10 - this.state.lastClickTime/1000).toFixed(2): '-'}<br/>
                     {this.state.lastOnTargetClickTime ? (10 - this.state.lastOnTargetClickTime/1000).toFixed(2): '-'}
                 </div>
-                <div className="card card-w2 card-t2">
-                    <ClickTimeByDistanceChart 
-                        onTargetTimeVsDistance={this.state.offTargetTimeVsDistance}
-                        offTargetTimeVsDistance={this.state.onTargetTimeVsDistance}
-                    />
+                <div className="card card-w2">
+
                 </div>
             </div>
         );

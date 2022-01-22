@@ -7,6 +7,7 @@ class ClicksGameUI extends Component {
         return (
             <div className='block-screen'
                 style={{display:runningGame?'none':'block', alingItems:'center'}}
+                onClick={event => {event.stopPropagation()}}
             >
             { gameHasEnded ?
                 <button className='click-restart-button' onClick={restartGame}>

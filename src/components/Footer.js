@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaGithub, FaLinkedin, FaCoffee} from 'react-icons/fa';
+import {FaGithub, FaLinkedin, FaCode} from 'react-icons/fa';
 import './Footer.css';
 
 const medias = [
@@ -13,7 +13,7 @@ const medias = [
         url: "https://www.linkedin.com/in/lucasmsobrinho/",
     }, {
         name: "portfolio",
-        icon: <FaCoffee/>,
+        icon: <FaCode/>,
         url: "https://www.lucassobrinho.com/",
     }
 ]
@@ -38,11 +38,12 @@ const MediaButtonContainer = (props) => {
 }
 
 const MediaButton = (props) => {
-    const {url, name, icon } = props.item
+    const {url, name, icon, modifier } = props.item
     return (
         <a href={url} title={name}>
-            <div className="media-button" id={name} key={name}>
+            <div className="media-button" id={name} key={name} >
                 {icon}
+                {modifier?<div className="footer-circle"></div>:''}
             </div>
         </a>
     )
