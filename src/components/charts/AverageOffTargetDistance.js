@@ -1,8 +1,9 @@
 import React from 'react';
 import './TotalClicks.css';
 
-const AverageOffTargetDistance = (props) => {
-    const { averageOffTargetDistance } = props.data
+const AverageOffTargetDistance = ({ totalOffTargetDistError, totalClicks, onTargetClicks }) => {
+    const offTargetClicks = Math.max(totalClicks-onTargetClicks, 1)
+    const averageOffTargetDistance = totalOffTargetDistError/offTargetClicks
     return (
         <div className="click-counter-viewer">
             <div className="card-title">AVERAGE ERROR</div>

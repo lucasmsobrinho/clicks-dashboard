@@ -1,8 +1,7 @@
 import React from 'react';
 import './TotalClicks.css'
 
-const ClickAccuracy = (props) => {
-    const {onTargetClicks, totalClicks} = props.data;
+const ClickAccuracy = ({onTargetClicks, totalClicks}) => {
     const clickAccuracy = !totalClicks ? 0 : (100*onTargetClicks/totalClicks).toFixed(2)
     return (
         <div className="click-counter-viewer">

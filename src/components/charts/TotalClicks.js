@@ -1,8 +1,7 @@
 import React from 'react';
 import './TotalClicks.css'
 
-const TotalClicks = (props) => {
-    const {onTargetClicks, totalClicks} = props.data;
+const TotalClicks = ({onTargetClicks, totalClicks}) => {
     return (
         <div className="click-counter-viewer">
             <div className="card-title">CLICK COUNTER</div>

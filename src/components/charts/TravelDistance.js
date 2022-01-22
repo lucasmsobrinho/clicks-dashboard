@@ -1,8 +1,7 @@
 import React from 'react';
 import './TotalClicks.css'
 
-const TravelDistance = (props) => {
-    const { totalTraveledDistance } = props.data
+const TravelDistance = ({ totalTraveledDistance }) => {
     return (
         <div className="click-counter-viewer">
             <div className="card-title">TRAVEL DISTANCE</div>

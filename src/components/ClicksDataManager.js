@@ -25,7 +25,7 @@ const initialState = {
     onTargetTimeVsDistance: [],
     offTargetTimeVsDistance: [],
     totalTraveledDistance: 0,
-    averageOffTargetDistance: 0,
+    totalOffTargetDistError: 0,
 }
 
 class ClicksDataManager extends Component {
@@ -76,7 +76,7 @@ class ClicksDataManager extends Component {
         const {clickData, time, totalClicks, onTargetClicks, lastOnTargetClickTime,
             clicksOffTargetBySector, clicksOnTargetBySector, lastClickTime,
             onTargetTimeVsDistance, offTargetTimeVsDistance, totalTraveledDistance,
-            averageOffTargetDistance } = this.state
+            totalOffTargetDistError } = this.state
             
         const lastClickPosX = clickData.length > 0 ? clickData.slice(-1)[0].clickPosX : 150
         const lastClickPosY = clickData.length > 0 ? clickData.slice(-1)[0].clickPosY : 150
@@ -111,47 +111,75 @@ class ClicksDataManager extends Component {
             onTargetTimeVsDistance: onTarget?[...onTargetTimeVsDistance, newPoint]:onTargetTimeVsDistance,
             offTargetTimeVsDistance: onTarget?offTargetTimeVsDistance:[...offTargetTimeVsDistance, newPoint],
             totalTraveledDistance: totalTraveledDistance + travelDistanceLastClick,
-            averageOffTargetDistance: averageOffTargetDistance + (!onTarget && clickDistanceFromTarget),
+            totalOffTargetDistError: totalOffTargetDistError + (!onTarget && clickDistanceFromTarget),
         });
     }
 
     render() {
-        const { time, running, gameHasEnded } = this.state
+        const { time, running, gameHasEnded, totalClicks, 
+            onTargetClicks, clickData, lastClickTime,
+            lastOnTargetClickTime, clicksOffTargetBySector, 
+            clicksOnTargetBySector, onTargetTimeVsDistance, 
+            offTargetTimeVsDistance, totalTraveledDistance, 
+            totalOffTargetDistError } = this.state
         return (
             <div className="click-data-viewer">
                 <div className="top-dashboard-section">
                     <div className="card card-top">
-                        <TotalClicks data={this.state}/>
+                        <TotalClicks
+                            totalClicks={totalClicks}
+                            onTargetClicks={onTargetClicks}
+                        />
                     </div>
                     <div className="card card-top">
-                        <TravelDistance data={this.state}/>
+                        <TravelDistance
+                            totalTraveledDistance={totalTraveledDistance}
+                        />
                     </div>
                     <div className="card card-top">
-                        <AverageOffTargetDistance data={this.state}/>
+                        <AverageOffTargetDistance
+                            totalOffTargetDistError={totalOffTargetDistError}
+                            totalClicks={totalClicks}
+                            onTargetClicks={onTargetClicks}
+                        />
                     </div>
                     <div className="card card-top">
-                        <ClickAccuracy data={this.state}/>
+                        <ClickAccuracy
+                            onTargetClicks={onTargetClicks}
+                            totalClicks={totalClicks}
+                        />
                     </div>
                 </div>
                 <div className="click-data-grid">
                     <div className="card card-tall card-wide clicks-frame">
-                        <ClicksFrame
-                            registerClick={this.registerClick}
-                            startTimer={this.startTimer}
-                            resetData={this.resetData}
-                            running={running}
-                            gameHasEnded={gameHasEnded}
-                            time={time}
-                        />
+                        <div className="card-header">Performance Data Acquisitor</div>
+                        <div className="card-body">
+                            <ClicksFrame
+                                registerClick={this.registerClick}
+                                startTimer={this.startTimer}
+                                resetData={this.resetData}
+                                running={running}
+                                gameHasEnded={gameHasEnded}
+                                time={time}
+                            />
+                        </div>
                     </div>
-                    <div className="card card-wide card-t2">
-                        <ClickSpeedChart clickData={this.state.clickData} time={this.state.time}/>
+                    <div className="card card-wide card-tall">
+                        <div className="card-header">Click Speed Chart</div>
+                        <div className="card-body">
+                            <ClickSpeedChart
+                                clickData={clickData}
+                                time={time}/>
+                        </div>
                     </div>
-                    <div className="card card-w2 card-t2">
-                        <ClickTimeByDistanceChart 
-                            onTargetTimeVsDistance={this.state.onTargetTimeVsDistance}
-                            offTargetTimeVsDistance={this.state.offTargetTimeVsDistance}
-                        />
+                    <div className="card card-w2 card-tall">
+                        <div className="card-header">Time vs Distance Chart</div>
+                        <div className="card-body">
+                            <ClickTimeByDistanceChart 
+                                onTargetTimeVsDistance={onTargetTimeVsDistance}
+                                offTargetTimeVsDistance={offTargetTimeVsDistance}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
